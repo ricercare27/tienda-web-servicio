@@ -57,3 +57,8 @@ def vista_catalogo(request):
 
 def home(request):
     return render(request, 'catalogo/home.html')
+
+
+def detalle_producto(request, producto_id):
+    producto = Producto.objects.get(id=producto_id)
+    return render(request, 'catalogo/detalle.html', {'producto': producto})
