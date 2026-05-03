@@ -53,3 +53,7 @@ def producto_detalle(request, producto_id):
 def vista_catalogo(request):
     productos = Producto.objects.all()
     return render(request, 'catalogo/lista.html', {'productos': productos})
+
+
+def home(request):
+    return render(request, 'catalogo/home.html')
