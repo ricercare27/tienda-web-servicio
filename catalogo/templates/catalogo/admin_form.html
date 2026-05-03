@@ -1,20 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-    <title>Formulario producto</title>
+    <meta charset="UTF-8">
+    <title>Tienda – El Abarrotero</title>
+    <link rel="stylesheet" href="{% static 'catalogo/styles.css' %}">
 </head>
 
 <body>
-    <h1>Producto</h1>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/catalogo/">Ver catálogo</a>
+        <a href="/gestion/productos/">Gestionar productos</a>
+    </nav>
 
-    <a href="/admin/productos/">Cancelar</a>
+    <hr>
+
+    <h1>Bienvenido a la tienda</h1>
+
+    <p>
+        Este sistema permite consultar productos, ver su detalle y gestionar
+        el catálogo mediante un servicio web desarrollado con Django.
+    </p>
+
+    <p>
+        Desde aquí puedes acceder al catálogo de productos o al panel de gestión.
+    </p>
+
 </body>
 
 </html>
