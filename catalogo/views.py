@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Producto
 import json
 from django.shortcuts import render
+from .forms import ProductoForm
 
 
 @csrf_exempt
@@ -62,3 +63,35 @@ def home(request):
 def detalle_producto(request, producto_id):
     producto = Producto.objects.get(id=producto_id)
     return render(request, 'catalogo/detalle.html', {'producto': producto})
+
+
+def admin_lista_productos(request):
+    productos = Producto.objects.all()
+    return render(request, 'catalogo/admin_lista.html', {'productos': productos})
+
+
+def admin_producto_form(request, producto_id=None):
+    if producto_id:
+        producto = Producto.objects.get(id=producto_id)
+    else:
+        producto = None
+
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('/admin/productos/')
+    else:
+        form = ProductoForm(instance=producto)
+
+    return render(request, 'catalogo/admin_form.html', {'form': form})
+
+
+def admin_borrar_producto(request, producto_id):
+    producto = Producto.objects.get(id=producto_id)
+
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('/admin/productos/')
+
+    return render(request, 'catalogo/admin_confirmar_borrado.html', {'producto': producto})

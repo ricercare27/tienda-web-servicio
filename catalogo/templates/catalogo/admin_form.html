@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Formulario producto</title>
+</head>
+
+<body>
+    <h1>Producto</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+
+    <a href="/admin/productos/">Cancelar</a>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Administrar productos</title>
+</head>
+
+<body>
+    <h1>Administrador de productos</h1>
+
+    <a href="/gestion/productos/nuevo/">Agregar producto</a>
+
+    <table border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.nombre }}</td>
+            <td>${{ producto.precio }}</td>
+            <td>
+                <a href="/admin/productos/editar/{{ producto.id }}/">Editar</a>
+                <a href="/admin/productos/borrar/{{ producto.id }}/">Borrar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Volver al inicio</a>
+</body>
+
+</html>
