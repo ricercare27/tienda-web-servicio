@@ -4,6 +4,8 @@ from .models import Producto
 import json
 from django.shortcuts import render
 from .forms import ProductoForm
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
 
 @csrf_exempt
@@ -65,12 +67,18 @@ def detalle_producto(request, producto_id):
     return render(request, 'catalogo/detalle.html', {'producto': producto})
 
 
+@login_required
 def admin_lista_productos(request):
+    if not request.user.is_staff:
+        return HttpResponseForbidden()
     productos = Producto.objects.all()
     return render(request, 'catalogo/admin_lista.html', {'productos': productos})
 
 
+@login_required
 def admin_producto_form(request, producto_id=None):
+    if not request.user.is_staff:
+        return HttpResponseForbidden()
     if producto_id:
         producto = Producto.objects.get(id=producto_id)
     else:
@@ -87,7 +95,10 @@ def admin_producto_form(request, producto_id=None):
     return render(request, 'catalogo/admin_form.html', {'form': form})
 
 
+@login_required
 def admin_borrar_producto(request, producto_id):
+    if not request.user.is_staff:
+        return HttpResponseForbidden()
     producto = Producto.objects.get(id=producto_id)
 
     if request.method == 'POST':
