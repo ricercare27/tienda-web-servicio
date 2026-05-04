@@ -16,7 +16,7 @@
     <p>Precio: ${{ producto.precio }}</p>
     <p>Existencia: {{ producto.existencia }}</p>
 
-    <a href="/catalogo/">Volver al catálogo</a>
+    <a href="{% url 'lista_productos' %}">Volver al catálogo</a>
 </body>
 
 </html>
